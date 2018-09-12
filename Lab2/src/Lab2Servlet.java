@@ -21,7 +21,8 @@ public class Lab2Servlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-//comment Alina
+//comment Alina..
+    //codfsfsdvds
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
