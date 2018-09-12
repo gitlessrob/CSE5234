@@ -30,6 +30,7 @@ public class Lab2Servlet extends HttpServlet {
 		response.getWriter().println("Hello World!!!!!!!!!!!");
 		// hello from sandhu
 		//hello hasbs dashdj
+		// dhdxn
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
