@@ -21,7 +21,7 @@ public class Lab2Servlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+//comment Alina
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
