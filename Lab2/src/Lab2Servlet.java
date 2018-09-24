@@ -21,13 +21,18 @@ public class Lab2Servlet extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
+//comment Alina..
+    //codfsfsdvds
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().println("Hello World!!!!!!!!!!!");
+		// hello from sandhu
+		//hello hasbs dashdj
+		// dhdxn
+		// sda asz
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
