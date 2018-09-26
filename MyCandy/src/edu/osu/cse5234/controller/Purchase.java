@@ -46,7 +46,7 @@ public class Purchase {
 		order.setItems(itemList);
 		
 		//TODO should this be request or session scoped?
-		request.getSession().setAttribute("order", order);
+		request.setAttribute("order", order);
 		
 		return "OrderEntryForm";
 	}
@@ -83,12 +83,12 @@ public class Purchase {
 	
 	@RequestMapping(path = "/viewOrder", method = RequestMethod.GET)
 	public String viewOrderPage(HttpServletRequest request, HttpServletResponse response) {
-		Object shipping = request.getSession().getAttribute("shipping");
-		request.setAttribute("shipping", shipping);
-		Object order = request.getSession().getAttribute("order");
-		request.setAttribute("order", order);
-		Object payment = request.getSession().getAttribute("payment");
-		request.setAttribute("payment", payment);
+//		Object shipping = request.getSession().getAttribute("shipping");
+//		request.setAttribute("shipping", shipping);
+//		Object order = request.getSession().getAttribute("order");
+//		request.setAttribute("order", order);
+//		Object payment = request.getSession().getAttribute("payment");
+//		request.setAttribute("payment", payment);
 		return "ViewOrder";
 	}
 	
