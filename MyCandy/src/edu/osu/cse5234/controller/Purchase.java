@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/purchase")
 public class Purchase {
-	
+	ArrayList<Item> itemList;
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewOrderEntryPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// ... instantiate and set order object with items to display
@@ -37,7 +37,7 @@ public class Purchase {
 		goldenEgg.setPrice("59.99");
 		
 		Order order = new Order();
-		ArrayList<Item> itemList = new ArrayList<>();
+		itemList = new ArrayList<>();
 		itemList.add(snowballBlast);
 		itemList.add(granolaSurprise);
 		itemList.add(chocolateOverload);
@@ -47,12 +47,12 @@ public class Purchase {
 		
 		//TODO should this be request or session scoped?
 		request.setAttribute("order", order);
-		
 		return "OrderEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitItems", method = RequestMethod.POST)
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
+		
 		request.getSession().setAttribute("order", order);
 		return "redirect:/purchase/paymentEntry";
 	}

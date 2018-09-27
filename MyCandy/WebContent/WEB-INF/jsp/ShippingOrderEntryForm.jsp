@@ -19,32 +19,32 @@
       
       <tr>
         <td><strong>Name</strong></td>
-        <td><form:input path="${shipping.name}" /></td>
+        <td><form:input path="name" /></td>
       </tr>
       
       <tr>
         <td><strong>Address Line 1</strong></td>
-        <td><form:input path="${shipping.addressLine1}" /></td>
+        <td><form:input path="addressLine1" /></td>
       </tr>
       
       <tr>
         <td><strong>Address Line 2</strong></td>
-        <td><form:input path="${shipping.addressLine2}" /></td>
+        <td><form:input path="addressLine2" /></td>
       </tr>
       
       <tr>
         <td><strong>City</strong></td>
-        <td><form:input path="${shipping.city}" /></td>
+        <td><form:input path="city" /></td>
       </tr>
       
       <tr>
         <td><strong>State</strong></td>
-        <td><form:input path="${shipping.state}" /></td>
+        <td><form:input path="state" /></td>
       </tr>
       
       <tr>
         <td><strong>Zipcode</strong></td>
-        <td><form:input path="${shipping.zip}" /></td>
+        <td><form:input path="zip" /></td>
       </tr>
 
 	  <tr>

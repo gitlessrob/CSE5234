@@ -18,23 +18,24 @@
       </tr>
       
       <tr>
+       
         <td><strong>Credit Card Number</strong></td>
-        <td><form:input path="${payment.ccNum}" /></td>
+        <td><form:input path="ccNum" /></td>
       </tr>
       
       <tr>
         <td><strong>Expiration Date</strong></td>
-        <td><form:input path="${payment.expiryDate}" /></td>
+        <td><form:input path="expiryDate" /></td>
       </tr>
       
       <tr>
         <td><strong>CVV Code</strong></td>
-        <td><form:input path="${payment.cvvCode}" /></td>
+        <td><form:input path="cvvCode" /></td>
       </tr>
       
       <tr>
         <td><strong>Name on Card</strong></td>
-        <td><form:input path="${payment.cardHolderName}" /></td>
+        <td><form:input path="cardHolderName" /></td>
       </tr>
 
 	  <tr>

@@ -2,10 +2,10 @@ package edu.osu.cse5234.controller;
 
 public class PaymentInfo {
 	
-	private String ccNum;
-	private String expiryDate;
-	private String cvvCode;
-	private String cardHolderName;
+	public String ccNum;
+	public String expiryDate;
+	public String cvvCode;
+	public String cardHolderName;
 	
 	public String getCcNum() {
 		return ccNum;

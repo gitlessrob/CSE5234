@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<form:form modelAttribute="order" method="post" action="purchase/submitItems">
+<form method="post">
 
     <table width="400" border="1">
       <tr>
@@ -27,14 +27,14 @@
 		<tr>
 			<td><c:out value="${item.name}"></c:out></td>
 			<td><c:out value="$${item.price}"></c:out></td>
-			<td><c:out value="items[${loop.index}].quantity" /></td>
+			<td><c:out value="${item.quantity}" /></td>
 		</tr>
 	</c:forEach>	
 
     </table>
-</form:form>
+</form>
 
-<form:form modelAttribute="payment" method="post" action="submitPayment">
+<form method="post">
 
     <table width="400" border="1">
       <tr>
@@ -44,6 +44,7 @@
       <tr>
         <td><strong>Credit Card Number</strong></td>
         <td><c:out value="${payment.ccNum}" /></td>
+       
       </tr>
       
       <tr>
@@ -62,8 +63,7 @@
       </tr>
 
     </table>
-</form:form>
-	
+	</form>
 	<form:form modelAttribute="shipping" method="post" action="confirmOrder">
 
     <table width="400" border="1">
