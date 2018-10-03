@@ -15,19 +15,27 @@
 <center>
 <h3>Delectable Delights</h3>
 <h5>Find candies from all over the world</h5>
-</center>
-<ul>
+
+<div id="one">
+<ul id="two">
 <%
 ArrayList<String> list=new ArrayList<String>();
 list=(ArrayList<String>)request.getAttribute("menu");
 
 %>
-<li><a href=""><%=list.get(0) %></a></li>
-<li><a href="purchase"><%=list.get(1) %></a></li>
-<li><a href="AboutUs"><%=list.get(2) %></a></li>
-<li><a href="ContactUs"><%=list.get(3) %></a></li>
+
 
 
 </ul>
+</div>
+</center>
+<div class="topnav">
+  <a class="active" href="#home">Home</a>
+ <a href="purchase"><%=list.get(1) %></a>
+  <a href="AboutUs"><%=list.get(2) %></a>
+  <a href="#about">About</a>
+  <a href="ContactUs"><%=list.get(3) %></a>
+</div>
+  
 </body>
 </html>
