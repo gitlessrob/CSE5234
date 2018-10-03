@@ -18,11 +18,7 @@
 
 <div id="one">
 <ul id="two">
-<%
-ArrayList<String> list=new ArrayList<String>();
-list=(ArrayList<String>)request.getAttribute("menu");
 
-%>
 
 
 
@@ -30,11 +26,10 @@ list=(ArrayList<String>)request.getAttribute("menu");
 </div>
 </center>
 <div class="topnav">
-  <a class="active" href="#home">Home</a>
- <a href="purchase"><%=list.get(1) %></a>
-  <a href="AboutUs"><%=list.get(2) %></a>
-  <a href="#about">About</a>
-  <a href="ContactUs"><%=list.get(3) %></a>
+  <a class="active" href="/MyCandy/">Home</a>
+ <a href="purchase">Purchase</a>
+  <a href="AboutUs">About Us</a>
+  <a href="ContactUs">Contact</a>
 </div>
   
 </body>

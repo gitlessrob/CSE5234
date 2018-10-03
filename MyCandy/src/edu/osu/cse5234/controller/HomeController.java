@@ -23,12 +23,12 @@ public class HomeController {
 		// ... instantiate and set menu items to display
 		ArrayList<String> menuItems = new ArrayList<>();
 		
-		menuItems.add("Home");
-		menuItems.add("Purchase");
-		menuItems.add("About Us");
-		menuItems.add("Contact");
+		//menuItems.add("Home");
+		//menuItems.add("Purchase");
+		//menuItems.add("About Us");
+		//menuItems.add("Contact");
 		
-		request.setAttribute("menu", menuItems);
+		//request.setAttribute("menu", menuItems);
 		return "home";
 	}
 
