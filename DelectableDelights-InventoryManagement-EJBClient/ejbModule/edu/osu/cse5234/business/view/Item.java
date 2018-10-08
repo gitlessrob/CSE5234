@@ -1,7 +1,11 @@
-package edu.osu.cse5234.controller;
+package edu.osu.cse5234.business.view;
 
-public class Item {
+public class Item implements java.io.Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6205737053442725966L;
 	private String name;
 	private String price;
 	private String quantity;
