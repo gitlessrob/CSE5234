@@ -1,5 +1,6 @@
 package edu.osu.cse5234.controller;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +10,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.osu.cse5234.business.OrderProcessingServiceBean;
+import edu.osu.cse5234.business.view.Inventory;
+import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
+import edu.osu.cse5234.util.ServiceLocator;
 
 @Controller
 @RequestMapping("/purchase")
@@ -18,7 +23,7 @@ public class Purchase {
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewOrderEntryPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// ... instantiate and set order object with items to display
-		Item snowballBlast = new Item();
+		/*Item snowballBlast = new Item();
 		snowballBlast.setName("Snowball Blast");
 		snowballBlast.setPrice("4.99");
 		
@@ -45,7 +50,12 @@ public class Purchase {
 		itemList.add(chocolateOverload);
 		itemList.add(theBigOne);
 		itemList.add(goldenEgg);
-		order.setItems(itemList);
+		order.setItems(itemList);*/
+		InventoryService invServ = ServiceLocator.getInventoryService();
+		Inventory inv = invServ.getAvailableInventory();
+		ArrayList<Item> list = inv.getList();
+		Order order = new Order();
+		order.setItems(list);
 		
 		//TODO should this be request or session scoped?
 		request.setAttribute("order", order);
@@ -54,9 +64,14 @@ public class Purchase {
 	
 	@RequestMapping(path = "/submitItems", method = RequestMethod.POST)
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
-		
-		request.getSession().setAttribute("order", order);
-		return "redirect:/purchase/paymentEntry";
+		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
+		if(orderProcServ.validateItemAvailability(order)) {
+			request.getSession().setAttribute("order", order);
+			return "redirect:/purchase/paymentEntry";
+		} else {
+			// TODO figure out how to make popup (Objective 3/4 number 4)
+			return "";
+		}
 	}
 	
 	@RequestMapping(path = "/paymentEntry", method = RequestMethod.GET)
