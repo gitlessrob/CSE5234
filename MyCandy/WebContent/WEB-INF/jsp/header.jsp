@@ -27,9 +27,9 @@
 </center>
 <div class="topnav">
   <a class="active" href="/MyCandy/">Home</a>
- <a href="purchase">Purchase</a>
-  <a href="AboutUs">About Us</a>
-  <a href="ContactUs">Contact</a>
+ <a href="/MyCandy/purchase">Purchase</a>
+  <a href="/MyCandy/AboutUs">About Us</a>
+  <a href="/MyCandy/ContactUs">Contact</a>
 </div>
   
 </body>

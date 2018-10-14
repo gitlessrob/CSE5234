@@ -54,6 +54,7 @@ public class Purchase {
 		InventoryService invServ = ServiceLocator.getInventoryService();
 		Inventory inv = invServ.getAvailableInventory();
 		ArrayList<Item> list = inv.getList();
+	
 		Order order = new Order();
 		order.setItems(list);
 		
@@ -65,12 +66,19 @@ public class Purchase {
 	@RequestMapping(path = "/submitItems", method = RequestMethod.POST)
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
+		
+		
+		
 		if(orderProcServ.validateItemAvailability(order)) {
 			request.getSession().setAttribute("order", order);
+			request.getSession().setAttribute("error","");
+			
 			return "redirect:/purchase/paymentEntry";
 		} else {
 			// TODO figure out how to make popup (Objective 3/4 number 4)
-			return "";
+			request.getSession().setAttribute("error", "The item selected is out of stock");
+			
+			return "redirect:/purchase";
 		}
 	}
 	
@@ -102,8 +110,8 @@ public class Purchase {
 	public String viewOrderPage(HttpServletRequest request, HttpServletResponse response) {
 //		Object shipping = request.getSession().getAttribute("shipping");
 //		request.setAttribute("shipping", shipping);
-//		Object order = request.getSession().getAttribute("order");
-//		request.setAttribute("order", order);
+		Object order = request.getSession().getAttribute("order");
+		request.setAttribute("order", order);
 //		Object payment = request.getSession().getAttribute("payment");
 //		request.setAttribute("payment", payment);
 		return "ViewOrder";
@@ -111,6 +119,10 @@ public class Purchase {
 	
 	@RequestMapping(path = "/confirmOrder", method = RequestMethod.POST)
 	public String confirmOrder(@ModelAttribute("order") Order order, HttpServletRequest request) {
+		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
+		String confirmNum=orderProcServ.processOrder(order);
+	
+		request.getSession().setAttribute("confirmationNum", confirmNum);
 		return "redirect:/purchase/viewConfirmation";
 	}
 	

@@ -26,25 +26,31 @@ public class InventoryServiceBean implements InventoryService {
 
 	@Override
 	public Inventory getAvailableInventory() {
+		
 		Item snowballBlast = new Item();
 		snowballBlast.setName("Snowball Blast");
 		snowballBlast.setPrice("4.99");
+		snowballBlast.setStock(2);
 		
 		Item granolaSurprise = new Item();
 		granolaSurprise.setName("Granola Surprise");
 		granolaSurprise.setPrice("1.99");
+		granolaSurprise.setStock(2);
 		
 		Item chocolateOverload = new Item();
 		chocolateOverload.setName("Chocolate Overload");
 		chocolateOverload.setPrice("9.99");
+		chocolateOverload.setStock(2);
 		
 		Item theBigOne = new Item();
 		theBigOne.setName("The Big One");
 		theBigOne.setPrice("15.99");
+		theBigOne.setStock(2);
 		
 		Item goldenEgg = new Item();
 		goldenEgg.setName("Golden Egg");
 		goldenEgg.setPrice("59.99");
+		goldenEgg.setStock(2);
 		
 		Inventory inv = new Inventory();
 		ArrayList<Item> itemList = new ArrayList<>();
@@ -54,6 +60,7 @@ public class InventoryServiceBean implements InventoryService {
 		itemList.add(theBigOne);
 		itemList.add(goldenEgg);
 		inv.setList(itemList);
+		
 
 		return inv;
 	}
@@ -61,12 +68,39 @@ public class InventoryServiceBean implements InventoryService {
 	@Override
 	public boolean validateQuantity(Collection<Item> items) {
 		// TODO temporary infinite inventory
-		return true;
+		boolean cond=true;
+		try {
+		for (Item item : items) {
+			if(item.getQuantity().equals(""))
+					item.setQuantity("0");
+			if(Integer.parseInt(item.getQuantity())>item.getStock())
+			{
+				cond=false;
+			}
+		}}
+		catch(NullPointerException e)
+		{
+			
+		}
+		return cond;
 	}
 
 	@Override
 	public boolean updateInventory(Collection<Item> items) {
 		// TODO temporary infinite inventory
+		try {
+for (Item item : items) {
+			int k=Integer.parseInt(item.getQuantity());
+			if(k<=item.getStock())
+			{
+				k=item.getStock()-k;
+				item.setStock(k);
+			}
+		}}
+catch(NullPointerException e)
+{
+	
+}
 		return true;
 	}
 

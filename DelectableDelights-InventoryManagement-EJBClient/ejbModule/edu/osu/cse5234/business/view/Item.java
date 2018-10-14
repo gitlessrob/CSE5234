@@ -9,6 +9,7 @@ public class Item implements java.io.Serializable {
 	private String name;
 	private String price;
 	private String quantity;
+	private static int stock=-1;
 	
 	public String getName() {
 		return name;
@@ -29,6 +30,12 @@ public class Item implements java.io.Serializable {
 	}
 	public void setQuantity(String quantity) {
 		this.quantity = quantity;
+	}
+	public int getStock() {
+		return stock;
+	}
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 	
 }

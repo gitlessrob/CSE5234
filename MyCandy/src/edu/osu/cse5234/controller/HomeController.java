@@ -21,7 +21,7 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewOrderEntryPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// ... instantiate and set menu items to display
-		ArrayList<String> menuItems = new ArrayList<>();
+		ArrayList<String> menuItems = new ArrayList<String>();
 		
 		//menuItems.add("Home");
 		//menuItems.add("Purchase");

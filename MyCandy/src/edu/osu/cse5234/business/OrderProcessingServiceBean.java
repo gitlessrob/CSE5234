@@ -17,6 +17,7 @@ import edu.osu.cse5234.util.ServiceLocator;
 @Stateless
 @LocalBean
 public class OrderProcessingServiceBean {
+	static int k=0;
 
     /**
      * Default constructor. 
@@ -27,7 +28,13 @@ public class OrderProcessingServiceBean {
     
     public String processOrder(Order order) {
     	// TODO Objective 3 (instructions unclear)
-    	return "";
+    	k=k+1;
+
+    	InventoryService orderProcServ = ServiceLocator.getInventoryService();
+    	boolean chk=validateItemAvailability(order);
+    	if(chk)
+    		orderProcServ.updateInventory(order.getItems());
+    	return String.valueOf(k);
     }
     
     public boolean validateItemAvailability(Order order) {
