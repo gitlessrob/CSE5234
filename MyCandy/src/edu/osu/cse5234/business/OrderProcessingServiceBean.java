@@ -1,6 +1,6 @@
 package edu.osu.cse5234.business;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -39,7 +39,7 @@ public class OrderProcessingServiceBean {
     
     public boolean validateItemAvailability(Order order) {
     	InventoryService invServ = ServiceLocator.getInventoryService();
-    	ArrayList<Item> items = order.getItems();
+    	List<Item> items = order.getItems();
     	return invServ.validateQuantity(items);
     }
 

@@ -2,6 +2,7 @@ package edu.osu.cse5234.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -53,7 +54,7 @@ public class Purchase {
 		order.setItems(itemList);*/
 		InventoryService invServ = ServiceLocator.getInventoryService();
 		Inventory inv = invServ.getAvailableInventory();
-		ArrayList<Item> list = inv.getList();
+		List<Item> list = inv.getList();
 	
 		Order order = new Order();
 		order.setItems(list);

@@ -20,7 +20,7 @@ public class ServiceLocator {
 	public static InventoryService getInventoryService() {
 		try {
 	         return (InventoryService) InitialContext.doLookup(
-					"java:global/DelectableDelights-InventoryManagement-EJBEAR/DelectableDelights-InventoryManagement-EJBOrderProcessingServiceBean!edu.osu.cse5234.business.view.InventoryService");
+					"java:global/DelectableDelights-InventoryManagement-EJBEAR/DelectableDelights-InventoryManagement-EJB/InventoryServiceBean!edu.osu.cse5234.business.view.InventoryService");
 		} catch (NamingException ne) {
 				throw new RuntimeException(ne);
 		}

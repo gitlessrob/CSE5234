@@ -4,11 +4,13 @@ import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Session Bean implementation class InventoryServiceBean
@@ -23,11 +25,16 @@ public class InventoryServiceBean implements InventoryService {
     public InventoryServiceBean() {
         // TODO Auto-generated constructor stub
     }
+    
+    @PersistenceContext
+    EntityManager entityManager;
+    
+    private static String MY_QUERY = "Select i from Item i";
 
 	@Override
 	public Inventory getAvailableInventory() {
 		
-		Item snowballBlast = new Item();
+		/*Item snowballBlast = new Item();
 		snowballBlast.setName("Snowball Blast");
 		snowballBlast.setPrice("4.99");
 		snowballBlast.setStock(2);
@@ -50,18 +57,13 @@ public class InventoryServiceBean implements InventoryService {
 		Item goldenEgg = new Item();
 		goldenEgg.setName("Golden Egg");
 		goldenEgg.setPrice("59.99");
-		goldenEgg.setStock(2);
+		goldenEgg.setStock(2);*/
 		
-		Inventory inv = new Inventory();
-		ArrayList<Item> itemList = new ArrayList<>();
-		itemList.add(snowballBlast);
-		itemList.add(granolaSurprise);
-		itemList.add(chocolateOverload);
-		itemList.add(theBigOne);
-		itemList.add(goldenEgg);
-		inv.setList(itemList);
+		Inventory inv = new Inventory();		
+		List<Item> items = entityManager.createQuery(MY_QUERY, Item.class).getResultList();
+		inv.setList(items);
 		
-
+		
 		return inv;
 	}
 
@@ -69,7 +71,15 @@ public class InventoryServiceBean implements InventoryService {
 	public boolean validateQuantity(Collection<Item> items) {
 		// TODO temporary infinite inventory
 		boolean cond=true;
-		try {
+		Inventory inv = getAvailableInventory();
+		List<Item> itemList = inv.getList();
+		for (Item i : items) {
+			String q = i.getQuantity();
+			int quantity = Integer.parseInt(q);
+			//TODO figure out how best to make sure that the quantity of items
+			// ordered is less than or equal to what we have in the inventory
+		}
+		/*try {
 		for (Item item : items) {
 			if(item.getQuantity().equals(""))
 					item.setQuantity("0");
@@ -81,7 +91,7 @@ public class InventoryServiceBean implements InventoryService {
 		catch(NullPointerException e)
 		{
 			
-		}
+		}*/
 		return cond;
 	}
 
