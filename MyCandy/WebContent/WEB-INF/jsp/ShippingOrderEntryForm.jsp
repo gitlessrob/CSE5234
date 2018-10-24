@@ -42,12 +42,18 @@
         <td><strong>State</strong></td>
         <td><form:input path="state" /></td>
       </tr>
-      
+       <tr>
+        <td><strong>Country</strong></td>
+        <td><form:input path="country" /></td>
+      </tr>
       <tr>
         <td><strong>Zipcode</strong></td>
         <td><form:input path="zip" /></td>
       </tr>
-
+ <tr>
+        <td><strong>Email</strong></td>
+        <td><form:input path="email" /></td>
+      </tr>
 	  <tr>
 		<td colspan="2"><input type="submit" value="Submit"></td>
 	  </tr>
