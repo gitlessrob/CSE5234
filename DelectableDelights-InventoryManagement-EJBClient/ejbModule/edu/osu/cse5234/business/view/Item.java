@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="NAME")
+@Table(name="ITEM")
 public class Item implements java.io.Serializable {
 	
 	/**
@@ -26,14 +26,21 @@ public class Item implements java.io.Serializable {
 	private String name;
 	
 	@Column(name="UNIT_PRICE")
-	private String price;
+	private double price;
 	
 
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	@Column(name="AVAILABLE_QUANTITY")
-	private String quantity;
+	private int stock;
+	
 	
 	@Transient
-	private static int stock=-1;
+	private int quantity;
 	
 	public String getName() {
 		return name;
@@ -42,17 +49,17 @@ public class Item implements java.io.Serializable {
 		this.name = name;
 	}
 	
-	public String getPrice() {
+	public double getPrice() {
 		return price;
 	}
-	public void setPrice(String price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 	
-	public String getQuantity() {
+	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(String quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 	public int getStock() {
