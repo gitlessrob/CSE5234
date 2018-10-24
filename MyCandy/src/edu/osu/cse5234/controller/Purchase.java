@@ -4,6 +4,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Produces;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -21,6 +25,8 @@ import edu.osu.cse5234.util.ServiceLocator;
 @RequestMapping("/purchase")
 public class Purchase {
 	ArrayList<Item> itemList;
+	
+	List<LineItem> inorderlist;
 	@RequestMapping(method = RequestMethod.GET)
 	public String viewOrderEntryPage(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// ... instantiate and set order object with items to display
@@ -56,10 +62,22 @@ public class Purchase {
 		Inventory inv = invServ.getAvailableInventory();
 		List<Item> list = inv.getList();
 	
-		Order order = new Order();
-		order.setItems(list);
+		//Order order = new Order();
+		//order.setItems(list);
+		Order order=new Order();
+		 inorderlist = new ArrayList<LineItem>();
+		for(Item e:list)
+		{
+			LineItem item1=new LineItem();
+			item1.setId(e.getId());
+			item1.setItemName(e.getName());
+			item1.setPrice(e.getPrice());
+			inorderlist.add(item1);
+		}
+		order.setItems(inorderlist);
 		
 		//TODO should this be request or session scoped?
+		//request.setAttribute("order", list);
 		request.setAttribute("order", order);
 		return "OrderEntryForm";
 	}
@@ -68,9 +86,11 @@ public class Purchase {
 	public String submitItems(@ModelAttribute("order") Order order, HttpServletRequest request) {
 		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
 		
-		
+	
+		System.out.println("Order01 Customer Name is "+order.getItems().get(0).getItemName());
 		
 		if(orderProcServ.validateItemAvailability(order)) {
+			
 			request.getSession().setAttribute("order", order);
 			request.getSession().setAttribute("error","");
 			
@@ -85,25 +105,45 @@ public class Purchase {
 	
 	@RequestMapping(path = "/paymentEntry", method = RequestMethod.GET)
 	public String viewPaymentEntryPage(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("payment", new PaymentInfo());	
+		Order order =(Order) request.getSession().getAttribute("order");
+		
+		System.out.println("Order-1 Customer Name is "+order.getItems().get(0).getItemName());
+		request.setAttribute("payment",new PaymentInfo());	
 		return "PaymentEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitPayment", method = RequestMethod.POST)
 	public String submitPayment(@ModelAttribute("payment") PaymentInfo payment, HttpServletRequest request) {
+		Order order = (Order)request.getSession().getAttribute("order");
+		order.setPayment(payment);
+		order.setPaymentID(payment.getId());
+		request.getSession().setAttribute("order", order);
 		request.getSession().setAttribute("payment", payment);
+		
+		//request.getSession().setAttribute("order", payment);
 		return "redirect:/purchase/shippingEntry";
 	}
 	
 	@RequestMapping(path = "/shippingEntry", method = RequestMethod.GET)
 	public String viewShippingEntryPage(HttpServletRequest request, HttpServletResponse response) {
-		request.setAttribute("shipping", new ShippingInfo());	
+		Order order =(Order) request.getSession().getAttribute("order");
+		
+		
+		request.setAttribute("shipping",new ShippingInfo());	
 		return "ShippingOrderEntryForm";
 	}
 	
 	@RequestMapping(path = "/submitShipping", method = RequestMethod.POST)
 	public String submitShipping(@ModelAttribute("shipping") ShippingInfo shipping, HttpServletRequest request) {
+		Order order = (Order)request.getSession().getAttribute("order");
+		order.setShipping(shipping);
+		order.setCustomerName(shipping.getName());
+		order.setEmailAddress(shipping.getEmail());
+		order.setShipId(shipping.getId());
+		request.getSession().setAttribute("order", order);
 		request.getSession().setAttribute("shipping", shipping);
+		
+		
 		return "redirect:/purchase/viewOrder";
 	}
 	
@@ -111,7 +151,9 @@ public class Purchase {
 	public String viewOrderPage(HttpServletRequest request, HttpServletResponse response) {
 //		Object shipping = request.getSession().getAttribute("shipping");
 //		request.setAttribute("shipping", shipping);
-		Object order = request.getSession().getAttribute("order");
+		
+		Order order = (Order)request.getSession().getAttribute("order");
+		
 		request.setAttribute("order", order);
 //		Object payment = request.getSession().getAttribute("payment");
 //		request.setAttribute("payment", payment);
@@ -120,10 +162,15 @@ public class Purchase {
 	
 	@RequestMapping(path = "/confirmOrder", method = RequestMethod.POST)
 	public String confirmOrder(@ModelAttribute("order") Order order, HttpServletRequest request) {
+		//System.out.println("Order Customer Name is "+order.getItems().get(0).getItemName());
+		Order order2 = (Order)request.getSession().getAttribute("order");
+		
 		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
-		String confirmNum=orderProcServ.processOrder(order);
-	
+		
+		String confirmNum=orderProcServ.processOrder(order2);
+		
 		request.getSession().setAttribute("confirmationNum", confirmNum);
+		
 		return "redirect:/purchase/viewConfirmation";
 	}
 	
