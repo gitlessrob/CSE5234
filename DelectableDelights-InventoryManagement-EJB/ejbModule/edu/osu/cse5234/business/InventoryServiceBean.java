@@ -59,10 +59,9 @@ public class InventoryServiceBean implements InventoryService {
 		goldenEgg.setPrice("59.99");
 		goldenEgg.setStock(2);*/
 		
-		Inventory inv = new Inventory();		
+		Inventory inv = new Inventory();
 		List<Item> items = entityManager.createQuery(MY_QUERY, Item.class).getResultList();
 		inv.setList(items);
-		
 		
 		return inv;
 	}
@@ -75,9 +74,15 @@ public class InventoryServiceBean implements InventoryService {
 		List<Item> itemList = inv.getList();
 		for (Item i : items) {
 			String q = i.getQuantity();
+			if (q.equals("")) {
+				i.setQuantity("0");
+			}
 			int quantity = Integer.parseInt(q);
-			//TODO figure out how best to make sure that the quantity of items
-			// ordered is less than or equal to what we have in the inventory
+			Item inventoryItem = itemList.get(itemList.indexOf(i));
+			int stock = Integer.parseInt(inventoryItem.getQuantity());
+			if (stock < quantity) {
+				cond = false;
+			}
 		}
 		/*try {
 		for (Item item : items) {

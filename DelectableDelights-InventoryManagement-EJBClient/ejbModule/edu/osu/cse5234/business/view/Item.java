@@ -9,7 +9,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name="NAME")
+@Table(name="ITEM")
 public class Item implements java.io.Serializable {
 	
 	/**
@@ -28,7 +28,6 @@ public class Item implements java.io.Serializable {
 	@Column(name="UNIT_PRICE")
 	private String price;
 	
-
 	@Column(name="AVAILABLE_QUANTITY")
 	private String quantity;
 	
