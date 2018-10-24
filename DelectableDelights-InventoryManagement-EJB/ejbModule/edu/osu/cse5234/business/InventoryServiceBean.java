@@ -4,6 +4,7 @@ import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
 
+
 import java.util.Collection;
 import java.util.List;
 
@@ -12,12 +13,14 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+
 /**
  * Session Bean implementation class InventoryServiceBean
  */
 @Stateless
 @Remote(InventoryService.class)
 public class InventoryServiceBean implements InventoryService {
+
 
     /**
      * Default constructor. 
@@ -73,25 +76,33 @@ public class InventoryServiceBean implements InventoryService {
 		boolean cond=true;
 		Inventory inv = getAvailableInventory();
 		List<Item> itemList = inv.getList();
-		for (Item i : items) {
+	/*	for (Item i : items) {
 			String q = i.getQuantity();
 			int quantity = Integer.parseInt(q);
 			//TODO figure out how best to make sure that the quantity of items
 			// ordered is less than or equal to what we have in the inventory
-		}
-		/*try {
+		}*/
+		
+
+		try {
+			int k=0;
+			
 		for (Item item : items) {
-			if(item.getQuantity().equals(""))
-					item.setQuantity("0");
-			if(Integer.parseInt(item.getQuantity())>item.getStock())
+		//	if(item.getQuantity().equals(""))
+				//	item.setQuantity("0");
+			//System.out.println("Stock for "+item.getName()+" is "+item.getStock());
+			if((item.getQuantity())>itemList.get(k).getStock())
 			{
 				cond=false;
 			}
+		k++;
 		}}
+		
 		catch(NullPointerException e)
 		{
 			
-		}*/
+		}
+		
 		return cond;
 	}
 
@@ -99,14 +110,18 @@ public class InventoryServiceBean implements InventoryService {
 	public boolean updateInventory(Collection<Item> items) {
 		// TODO temporary infinite inventory
 		try {
+			Inventory inv = getAvailableInventory();
+			List<Item> itemList = inv.getList();
+			int k1=0;
 for (Item item : items) {
-			int k=Integer.parseInt(item.getQuantity());
-			if(k<=item.getStock())
+			int k=item.getQuantity();
+			if(k<=itemList.get(k1).getStock())
 			{
-				k=item.getStock()-k;
-				item.setStock(k);
+				k=itemList.get(k1).getStock()-k;
+				itemList.get(k1).setStock(k);
 			}
-		}}
+		k1++;}
+}
 catch(NullPointerException e)
 {
 	
