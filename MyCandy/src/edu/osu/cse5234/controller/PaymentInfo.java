@@ -10,6 +10,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name="PAYMENT_INFO")
 public class PaymentInfo {
+	@Column(name="CONFIRM_NUM")
+	String confirmationNum;
+	public String getConfirmationNum() 
+	{
+		return confirmationNum;
+	}
+	public void setConfirmationNum(String confirmationNum) {
+		this.confirmationNum = confirmationNum;
+	}
 	@Column(name="CARD_NUM")
 	 String ccNum;
 	@Column(name="EXP_DATE")
