@@ -87,7 +87,7 @@ public class Purchase {
 		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
 		
 	
-		System.out.println("Order01 Customer Name is "+order.getItems().get(0).getItemName());
+	//	System.out.println("Order01 Customer Name is "+order.getItems().get(0).getItemName());
 		
 		if(orderProcServ.validateItemAvailability(order)) {
 			
@@ -107,7 +107,7 @@ public class Purchase {
 	public String viewPaymentEntryPage(HttpServletRequest request, HttpServletResponse response) {
 		Order order =(Order) request.getSession().getAttribute("order");
 		
-		System.out.println("Order-1 Customer Name is "+order.getItems().get(0).getItemName());
+		//System.out.println("Order-1 Customer Name is "+order.getItems().get(0).getItemName());
 		request.setAttribute("payment",new PaymentInfo());	
 		return "PaymentEntryForm";
 	}
@@ -116,7 +116,7 @@ public class Purchase {
 	public String submitPayment(@ModelAttribute("payment") PaymentInfo payment, HttpServletRequest request) {
 		Order order = (Order)request.getSession().getAttribute("order");
 		order.setPayment(payment);
-		order.setPaymentID(payment.getId());
+		//order.setPaymentID(payment.getId());
 		request.getSession().setAttribute("order", order);
 		request.getSession().setAttribute("payment", payment);
 		
@@ -139,7 +139,7 @@ public class Purchase {
 		order.setShipping(shipping);
 		order.setCustomerName(shipping.getName());
 		order.setEmailAddress(shipping.getEmail());
-		order.setShipId(shipping.getId());
+		//order.setShipId(shipping.getId());
 		request.getSession().setAttribute("order", order);
 		request.getSession().setAttribute("shipping", shipping);
 		
@@ -168,7 +168,7 @@ public class Purchase {
 		OrderProcessingServiceBean orderProcServ = ServiceLocator.getOrderProcessingService();
 		
 		String confirmNum=orderProcServ.processOrder(order2);
-		
+		//System.out.println("The confirm number is "+confirmNum);
 		request.getSession().setAttribute("confirmationNum", confirmNum);
 		
 		return "redirect:/purchase/viewConfirmation";
