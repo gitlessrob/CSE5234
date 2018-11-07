@@ -61,7 +61,7 @@ public class Purchase {
 		InventoryService invServ = ServiceLocator.getInventoryService();
 		Inventory inv = invServ.getAvailableInventory();
 		List<Item> list = inv.getList();
-	
+
 		//Order order = new Order();
 		//order.setItems(list);
 		Order order=new Order();
