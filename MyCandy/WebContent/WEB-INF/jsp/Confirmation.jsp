@@ -11,7 +11,8 @@
 </head>
 <body>
 <%@ include file="header.jsp" %> 
-Your order has been submitted, thank you!
+<p> The Order No is <c:out value="${order.id}"></c:out>.
+Your order has been submitted, thank you!</p>
 <%@ include file="footer.jsp" %> 
 </body>
 </html>
