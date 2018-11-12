@@ -19,6 +19,14 @@ public class ShippingInfo {
 	private String addressLine2;
 	@Column(name="CITY")
 	private String city;
+	@Column(name="UPS_SHIPPING_REF")
+	int shippingRefNumber;
+	public int getShippingRefNumber() {
+		return shippingRefNumber;
+	}
+	public void setShippingRefNumber(int shippingRefNumber) {
+		this.shippingRefNumber = shippingRefNumber;
+	}
 	@Column(name="COUNTRY")
 	private String country;
 	public String getCountry() {
