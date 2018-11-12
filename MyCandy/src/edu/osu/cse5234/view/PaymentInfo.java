@@ -1,4 +1,4 @@
-package edu.osu.cse5234.controller;
+package edu.osu.cse5234.view;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

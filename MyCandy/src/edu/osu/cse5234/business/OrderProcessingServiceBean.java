@@ -20,10 +20,10 @@ import com.ups.shipping.client.ShippingInitiationClient;
 import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
-import edu.osu.cse5234.controller.LineItem;
-import edu.osu.cse5234.controller.Order;
-import edu.osu.cse5234.controller.PaymentInfo;
 import edu.osu.cse5234.util.ServiceLocator;
+import edu.osu.cse5234.view.LineItem;
+import edu.osu.cse5234.view.Order;
+import edu.osu.cse5234.view.PaymentInfo;
 
 /**
  * Session Bean implementation class OrderProcessingServiceBean
