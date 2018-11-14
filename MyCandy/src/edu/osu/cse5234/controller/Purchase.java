@@ -1,4 +1,4 @@
-package edu.osu.cse5234.view;
+package edu.osu.cse5234.controller;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -20,6 +20,10 @@ import edu.osu.cse5234.business.view.Inventory;
 import edu.osu.cse5234.business.view.InventoryService;
 import edu.osu.cse5234.business.view.Item;
 import edu.osu.cse5234.util.ServiceLocator;
+import edu.osu.cse5234.view.LineItem;
+import edu.osu.cse5234.view.Order;
+import edu.osu.cse5234.view.PaymentInfo;
+import edu.osu.cse5234.view.ShippingInfo;
 
 @Controller
 @RequestMapping("/purchase")
